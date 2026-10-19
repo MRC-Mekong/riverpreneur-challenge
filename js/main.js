@@ -3,10 +3,6 @@
 
   document.documentElement.classList.add('js');
 
-  // Set this to the application form URL once it is ready; the Apply buttons
-  // in the hero and header point to the Submission section until then.
-  var APPLY_URL = '';
-
   var OPEN_DATE = new Date('2026-10-26T00:00:00+07:00');
   var DEADLINE = new Date('2026-12-04T23:59:59+07:00');
 
@@ -142,20 +138,13 @@
   tickCountdown();
   setInterval(tickCountdown, 1000);
 
-  /* ---------- Apply links ---------- */
-  var applyLink = document.getElementById('applyLink');
-  var now = new Date();
-  if (APPLY_URL && now >= OPEN_DATE && now <= DEADLINE) {
-    applyLink.href = APPLY_URL;
-    applyLink.target = '_blank';
-    applyLink.rel = 'noopener';
-    applyLink.removeAttribute('aria-disabled');
-  } else if (now < OPEN_DATE) {
-    applyLink.textContent = 'Opens 26 October 2026';
-  } else if (now > DEADLINE) {
-    applyLink.textContent = 'Applications closed';
-  } else {
-    applyLink.textContent = 'Application form coming soon';
+  /* ---------- Apply links: disable after the deadline ---------- */
+  if (new Date() > DEADLINE) {
+    document.querySelectorAll('[data-apply]').forEach(function (a) {
+      a.removeAttribute('href');
+      a.setAttribute('aria-disabled', 'true');
+      a.textContent = 'Applications closed';
+    });
   }
 
   /* ---------- Submission guideline tabs ---------- */

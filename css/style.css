@@ -98,6 +98,9 @@ h1,h2,h3,h4{font-family:var(--font-body);font-weight:900;line-height:1.12;margin
   display:flex;align-items:center;gap:24px;
 }
 .brand{display:flex;align-items:center;gap:12px;color:#fff;flex-shrink:0;}
+/* The MRC logo is always shown; the wordmark fades in once the header turns sticky */
+.brand-word{opacity:0;visibility:hidden;transition:opacity .35s var(--ease), visibility 0s linear .35s;}
+.site-header.is-scrolled .brand-word{opacity:1;visibility:visible;transition:opacity .35s var(--ease), visibility 0s;}
 .brand-logo{width:44px;height:44px;}
 .brand-word{font-family:var(--font-title);font-size:15px;line-height:1.05;letter-spacing:.1em;text-transform:uppercase;color:var(--lime-400);}
 .brand-word b{font-weight:700;font-size:19px;letter-spacing:.06em;}
@@ -125,9 +128,8 @@ h1,h2,h3,h4{font-family:var(--font-body);font-weight:900;line-height:1.12;margin
   padding:calc(var(--header-h) + 28px) 0 0;
 }
 .hero-grid{position:absolute;inset:0;width:100%;height:100%;color:#1d3a9e;opacity:.55;pointer-events:none;}
-.hero-inner{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:32px;align-items:center;}
-.hero-copy{padding:24px 0 40px;}
-.hero-mrc{width:76px;height:76px;margin-bottom:18px;}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;}
+.hero-copy{position:relative;z-index:2;padding:24px 0 40px;}
 .hero-title{margin:0;color:var(--lime-400);font-family:var(--font-title);font-weight:500;line-height:.86;text-transform:uppercase;}
 .hero-title-top{display:block;font-size:clamp(40px,6.2vw,80px);letter-spacing:.03em;font-variation-settings:"opsz" 80;}
 .hero-title-main{display:block;font-weight:700;font-size:clamp(66px,10.6vw,138px);letter-spacing:.015em;font-variation-settings:"opsz" 100;}
@@ -144,17 +146,20 @@ h1,h2,h3,h4{font-family:var(--font-body);font-weight:900;line-height:1.12;margin
 .hero-prize-text{font-size:15px;line-height:1.35;color:rgba(255,255,255,.88);}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;}
 
-.hero-art{position:relative;align-self:center;}
-.hero-art img{
-  width:100%;height:auto;max-width:580px;margin-left:auto;
-  aspect-ratio:950/800;object-fit:cover;object-position:50% 100%;
-  -webkit-mask-image:radial-gradient(ellipse 68% 62% at 50% 52%, #000 55%, transparent 100%);
-  mask-image:radial-gradient(ellipse 68% 62% at 50% 52%, #000 55%, transparent 100%);
-  animation:floaty 7s ease-in-out infinite;
+.hero-art{
+  position:absolute;top:var(--header-h);right:0;bottom:210px;width:50%;z-index:1;
+  display:flex;align-items:center;justify-content:flex-end;pointer-events:none;
 }
-@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.hero-art img{
+  width:100%;height:auto;max-height:100%;object-fit:contain;object-position:right center;
+  /* the river runs off the left and bottom edges of the artwork, so fade those edges into the background */
+  -webkit-mask-image:linear-gradient(to right, transparent 0, #000 16%), linear-gradient(to top, transparent 0, #000 18%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to right, transparent 0, #000 16%), linear-gradient(to top, transparent 0, #000 18%);
+  mask-composite:intersect;
+}
 
-.hero-infobar{position:relative;z-index:2;margin-top:-30px;}
+.hero-infobar{position:relative;z-index:2;margin-top:56px;}
 .infobar-card{
   display:grid;grid-template-columns:1fr 1fr 1.6fr;
   background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
@@ -169,17 +174,6 @@ h1,h2,h3,h4{font-family:var(--font-body);font-weight:900;line-height:1.12;margin
 .cd-num{font-family:var(--font-cond);font-weight:800;font-size:30px;line-height:1;font-variant-numeric:tabular-nums;}
 .cd-lbl{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:3px;}
 .hero-river{position:relative;display:block;width:100%;max-width:none;height:110px;object-fit:cover;object-position:center 40%;margin-top:28px;margin-bottom:-2px;}
-
-/* ---------- Stats ---------- */
-.stats-band{background:var(--paper);padding:56px 0 24px;}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
-.stat{padding:22px 24px;border-radius:var(--radius);background:var(--white);border:1px solid var(--line);}
-.stat-num{display:block;font-family:var(--font-cond);font-weight:800;font-size:46px;line-height:1;color:var(--blue-600);}
-.stat-num small{font-size:20px;color:var(--blue-800);}
-.stat-lbl{display:block;margin-top:8px;font-size:15px;line-height:1.35;color:var(--ink-soft);}
-.stat:nth-child(2) .stat-num{color:var(--lime-500);}
-.stat:nth-child(3) .stat-num{color:var(--amber-500);}
-.stat:nth-child(4) .stat-num{color:var(--blue-800);}
 
 /* ---------- Sections ---------- */
 .section{position:relative;padding:96px 0;}
@@ -495,14 +489,11 @@ h1,h2,h3,h4{font-family:var(--font-body);font-weight:900;line-height:1.12;margin
   .main-nav a{font-size:17px;padding:12px 14px;}
   .main-nav .nav-apply{display:flex;margin-top:10px;color:var(--navy-950);}
   .hero-inner{grid-template-columns:1fr;}
-  .hero-art{order:-1;max-width:420px;margin:0 auto -40px;}
-  .hero-art img{aspect-ratio:950/760;}
+  .hero-art{position:relative;inset:auto;order:-1;width:100%;max-width:480px;margin:0 auto -20px;}
   .hero-copy{padding-top:0;}
-  .hero-mrc{display:none;}
   .infobar-card{grid-template-columns:1fr 1fr;}
   .infobar-countdown{grid-column:1 / -1;border-top:1px solid rgba(255,255,255,.12);}
   .infobar-item:nth-child(2){border-right:0;}
-  .stats-grid{grid-template-columns:1fr 1fr;}
   .overview-grid,.challenge-grid,.assess-grid,.benefits-grid,.faq-grid{grid-template-columns:1fr;gap:40px;}
   .faq-head{position:static;}
   .track-grid{grid-template-columns:1fr;max-width:460px;margin-left:auto;margin-right:auto;}
@@ -521,9 +512,6 @@ h1,h2,h3,h4{font-family:var(--font-body);font-weight:900;line-height:1.12;margin
   .infobar-item{border-right:0;border-bottom:1px solid rgba(255,255,255,.12);padding:16px 20px;}
   .infobar-item:last-child{border-bottom:0;}
   .countdown-row{gap:14px;}
-  .stats-grid{gap:12px;}
-  .stat{padding:18px;}
-  .stat-num{font-size:36px;}
   .overview-art{min-height:380px;}
   .elig-layout{grid-template-columns:1fr;}
   .proposal-grid{grid-template-columns:1fr;}

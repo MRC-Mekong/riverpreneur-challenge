@@ -15,6 +15,7 @@
     var y = window.scrollY;
     header.classList.toggle('is-scrolled', y > 20);
     backToTop.classList.toggle('is-visible', y > 700);
+    if (y < 200) document.querySelectorAll('[data-nav].is-active').forEach(function (a) { a.classList.remove('is-active'); });
     var max = document.documentElement.scrollHeight - window.innerHeight;
     progressFill.style.transform = 'scaleX(' + (max > 0 ? y / max : 0) + ')';
   }
@@ -82,32 +83,6 @@
     window.addEventListener('scroll', sweep, { passive: true });
   } else {
     reveals.forEach(function (el) { el.classList.add('is-in'); });
-  }
-
-  /* ---------- Count-up stats ---------- */
-  function animateCount(el) {
-    var target = parseInt(el.getAttribute('data-count'), 10);
-    var comma = el.getAttribute('data-format') === 'comma';
-    var start = null;
-    function tick(now) {
-      if (!start) start = now;
-      var p = Math.min((now - start) / 1400, 1);
-      var v = Math.round(target * (1 - Math.pow(1 - p, 3)));
-      el.textContent = comma ? v.toLocaleString('en-US') : v;
-      if (p < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }
-  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    var countObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          animateCount(entry.target);
-          countObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.6 });
-    document.querySelectorAll('[data-count]').forEach(function (el) { countObserver.observe(el); });
   }
 
   /* ---------- Countdown: to opening, then to deadline ---------- */

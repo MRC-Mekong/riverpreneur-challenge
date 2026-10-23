@@ -94,7 +94,7 @@ h1,h2,h3,h4{font-family:var(--font-body);font-weight:900;line-height:1.12;margin
 }
 .site-header.is-scrolled{background:rgba(1,19,57,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 6px 24px -12px rgba(0,0,0,.5);}
 .header-inner{
-  height:100%;max-width:1320px;margin:0 auto;padding:0 28px;
+  height:100%;max-width:var(--wrap);margin:0 auto;padding:0 32px;
   display:flex;align-items:center;gap:24px;
 }
 .brand{display:flex;align-items:center;gap:12px;color:#fff;flex-shrink:0;}

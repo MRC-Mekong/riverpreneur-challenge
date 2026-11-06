@@ -102,8 +102,8 @@ h1,h2,h3,h4{font-family:var(--font-body);font-weight:900;line-height:1.12;margin
 .brand-word{opacity:0;visibility:hidden;transition:opacity .35s var(--ease), visibility 0s linear .35s;}
 .site-header.is-scrolled .brand-word{opacity:1;visibility:visible;transition:opacity .35s var(--ease), visibility 0s;}
 .brand-logo{width:44px;height:44px;}
-.brand-word{font-family:var(--font-title);font-size:15px;line-height:1.05;letter-spacing:.1em;text-transform:uppercase;color:var(--lime-400);}
-.brand-word b{font-weight:700;font-size:19px;letter-spacing:.06em;}
+.brand-word{font-family:var(--font-cond);font-weight:800;font-size:20px;line-height:1;letter-spacing:.02em;text-transform:uppercase;color:var(--lime-400);}
+.brand-word b{font-weight:inherit;font-size:inherit;letter-spacing:inherit;}
 
 .main-nav{display:flex;align-items:center;gap:4px;margin-left:auto;}
 .main-nav a{

@@ -438,8 +438,8 @@ h1,h2,h3,h4{font-family:var(--font-body);font-weight:900;line-height:1.12;margin
 .footer-grid{position:relative;display:grid;grid-template-columns:1.6fr 1fr 1.2fr 1fr;gap:40px;}
 .footer-logo-row{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
 .footer-logo{width:64px;height:64px;}
-.footer-word{font-family:var(--font-title);text-transform:uppercase;letter-spacing:.1em;color:var(--lime-400);font-size:17px;line-height:1.05;}
-.footer-word b{font-size:23px;letter-spacing:.06em;}
+.footer-word{font-family:var(--font-cond);font-weight:800;font-size:26px;line-height:1;letter-spacing:.02em;text-transform:uppercase;color:var(--lime-400);}
+.footer-word b{font-weight:inherit;font-size:inherit;letter-spacing:inherit;}
 .footer-address{font-size:14.5px;line-height:1.7;}
 .footer-address a{color:var(--lime-400);}
 .site-footer h4{color:#fff;font-size:15px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px;}

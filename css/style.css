@@ -404,6 +404,31 @@ h1,h2,h3,h4{font-family:var(--font-body);font-weight:900;line-height:1.12;margin
 .consent-card{padding:30px 34px;border-radius:24px;background:#fff;border:1px dashed var(--blue-400);}
 .consent-card p:last-child{margin:0;color:var(--ink-soft);font-size:15.5px;}
 
+/* ---------- Contact ---------- */
+.section.consent{padding-bottom:24px;}
+.section.contact{padding:0 0 72px;background:var(--blue-50);}
+.contact-card{
+  display:grid;grid-template-columns:.8fr 1.2fr;gap:28px;align-items:center;
+  padding:34px 36px 58px;border-radius:26px;
+  background:linear-gradient(110deg,var(--blue-800),var(--blue-600));color:#fff;
+  position:relative;overflow:hidden;isolation:isolate;
+}
+.contact-waves{position:absolute;left:0;right:0;bottom:-4px;width:100%;height:80px;opacity:.5;z-index:-1;pointer-events:none;}
+.contact-head h2{margin:0 0 .2em;color:var(--lime-400);font-size:clamp(34px,4.4vw,54px);letter-spacing:-.015em;}
+.contact-head p{margin:0;color:rgba(255,255,255,.85);font-size:18px;}
+.contact-list{display:flex;flex-direction:column;}
+.contact-person{display:flex;flex-direction:column;gap:2px;padding:16px 0;line-height:1.4;}
+.contact-person:first-child{padding-top:0;}
+.contact-person:last-child{padding-bottom:0;}
+.contact-person + .contact-person{border-top:1px solid rgba(255,255,255,.22);}
+.contact-person b{font-size:21px;}
+.contact-person span{font-size:17px;color:rgba(255,255,255,.8);}
+.contact-person a{
+  align-self:flex-start;margin-top:8px;font-weight:700;font-size:18.5px;color:var(--lime-400);
+  overflow-wrap:anywhere;border-bottom:1px solid rgba(155,225,93,.45);transition:color .2s, border-color .2s;
+}
+.contact-person a:hover{color:var(--lime-300);border-color:var(--lime-300);}
+
 /* ---------- FAQ ---------- */
 .faq{overflow:hidden;}
 .deco-leaves{left:-30px;bottom:30px;width:200px;opacity:.75;transform:rotate(-20deg);}
@@ -474,6 +499,7 @@ h1,h2,h3,h4{font-family:var(--font-body);font-weight:900;line-height:1.12;margin
   .elig-layout{grid-template-columns:1fr 1fr;}
   .elig-figure{display:none;}
   .footer-grid{grid-template-columns:1fr 1fr;}
+  .contact-card{grid-template-columns:1fr;}
 }
 @media (max-width:960px){
   :root{--header-h:68px;}
@@ -524,6 +550,7 @@ h1,h2,h3,h4{font-family:var(--font-body);font-weight:900;line-height:1.12;margin
   .timeline::before{left:7px;}
   .apply-cta{padding:26px 22px;}
   .benefit{flex-direction:column;gap:14px;}
+  .contact-card{padding:26px 22px 54px;}
   .footer-grid{grid-template-columns:1fr;}
   .site-footer{background-size:auto 70%;}
 }
